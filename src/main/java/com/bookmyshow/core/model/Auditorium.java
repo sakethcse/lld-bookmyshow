@@ -1,6 +1,10 @@
 package com.bookmyshow.core.model;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -10,28 +14,29 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "auditoriums")
-public class Auditorium extends Auditable {
+public class Auditorium extends com.bookmyshow.core.model.Auditable {
+
   //attribs
-  private String name;
-  private boolean hasAirConditioning;
-  private boolean supports3D;
+  private String hallName;
+  private boolean hasAirConditioner;
+  private boolean canHost3D;
   private int numberOfEmergencyExits;
+  private int numberOfExits;
 
   //relationships
   @ManyToOne
-  @Getter
-  @Setter
-  private Cinema cinema;
+  private com.bookmyshow.core.model.Cinema cinema;
 
   @OneToMany(mappedBy = "auditorium")
-  @Getter @Setter
-  private List<AudiSeat> seats = new ArrayList<>();
-
+  private List<AudiSeat> seats = new ArrayList<AudiSeat>();
 
   @OneToMany(mappedBy = "auditorium")
-  @Getter @Setter
   private List<MovieShow> shows = new ArrayList<MovieShow>();
 
 }

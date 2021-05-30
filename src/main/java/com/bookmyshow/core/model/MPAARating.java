@@ -1,9 +1,8 @@
 package com.bookmyshow.core.model;
 
 import lombok.Getter;
-import lombok.Setter;
 
-public enum  MPAARating {
+public enum MPAARating {
 
   GeneralAudience("G"),
   ParentalGuidenceSuggested("PG"),
@@ -14,6 +13,7 @@ public enum  MPAARating {
 
   @Getter
   private String code;
+
   MPAARating(String code) {
     this.code = code;
   }

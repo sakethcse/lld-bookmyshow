@@ -3,11 +3,10 @@ package com.bookmyshow.core.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import org.springframework.date.annotation.CreateDate;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
+
 
 @MappedSuperclass
 public abstract class Auditable {
@@ -36,8 +35,8 @@ public abstract class Auditable {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() == o.getClass())return false;
-    Auditable auditable = (Auditable) o;
+    if (o == null || getClass() == o.getClass()) return false;
+    com.bookmyshow.core.model.Auditable auditable = (com.bookmyshow.core.model.Auditable) o;
     return Objects.equals(id, auditable.id);
   }
 

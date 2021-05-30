@@ -1,6 +1,9 @@
 package com.bookmyshow.core.model;
 
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -11,40 +14,32 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
 @Entity
 @Table(name = "movies")
-public class Movie extends Auditable{
+public class Movie extends Auditable {
 
   //attribs
-  @Getter @Setter
   private String name;
-
-  @Getter @Setter
-  private  String director;
-
-  @Getter @Setter
+  private String director;
   private MPAARating mpaaRating;
-
-  @Getter @Setter
   private String language;
-
-  @Getter @Setter
   private Date releaseDate;
-
-  @Getter @Setter
   private int durationMinutes;
-
-  @Getter @Setter
   private String summary;
 
 
   //relationships
-
   @OneToMany(mappedBy = "movie")
-  @Getter @Setter
   private List<MovieShow> shows = new ArrayList<MovieShow>();
 
   @ManyToMany
-  @Getter @Setter
   private List<Genre> genres = new ArrayList<Genre>();
+
+  public Movie(String name, MPAARating mpaaRating) {
+    this.name = name;
+    this.mpaaRating = mpaaRating;
+  }
 }

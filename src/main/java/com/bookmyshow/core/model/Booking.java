@@ -1,7 +1,9 @@
 package com.bookmyshow.core.model;
 
 
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -11,35 +13,34 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 @Entity
-@Table(name="bookings")
-public class Booking extends Auditable{
+@Table(name = "bookings")
+public class Booking extends Auditable {
+
   //attribs
-  @Getter @Setter
   private double totalPrice = 0;
 
 
   //relationships
   @ManyToOne
-  @Getter
-  @Setter
   private MovieShow show;
 
   @OneToMany
-  @Getter
-  @Setter
-  private List<ShowSeat> seats = new ArrayList<>();
+  private List<ShowSeat> seats = new ArrayList<ShowSeat>();
 
   @OneToMany
-  @Getter
-  @Setter
-  private List<Transaction> transactions = new ArrayList<>();
+  private List<Transaction> transactions = new ArrayList<Transaction>();
 
   @ManyToOne
-  @Getter @Setter
-  private Coupon  coupon;
+  private Coupon coupon;
 
   @ManyToOne
-  @Getter @Setter
-  private User  user;
+  private User user;
+
+  public Booking(MovieShow show, User user) {
+    this.show = show;
+    this.user = user;
+  }
 }

@@ -1,6 +1,8 @@
 package com.bookmyshow.core.model;
 
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -10,15 +12,15 @@ import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "movieshows")
-public class MovieShow extends Auditable{
+public class MovieShow extends Auditable {
 
   //attribs
-  @Getter @Setter
   private Date timingFrom;
 
-  @Getter @Setter
   private Date timingTo;
 
   //relationships
@@ -26,10 +28,14 @@ public class MovieShow extends Auditable{
   private List<Booking> bookings;
 
   @ManyToOne
-  @Getter @Setter
   private Auditorium auditorium;
 
   @ManyToOne
-  @Getter @Setter
   private Movie movie;
+
+  public MovieShow(Date timingFrom, Date timingTo, Movie movie) {
+    this.timingFrom = timingFrom;
+    this.timingTo = timingTo;
+    this.movie = movie;
+  }
 }
