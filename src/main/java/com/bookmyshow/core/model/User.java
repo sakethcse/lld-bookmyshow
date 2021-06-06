@@ -37,6 +37,7 @@ public class User extends Auditable {
   private Set<Role> roles = new HashSet<Role>();
 
   @OneToOne
+  @Getter @Setter
   private Profile profile;
 
   public User(User user) { // copy constructor

@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cities")
-public class City {
+public class City extends Auditable{
 
   //attribs
   private String name;

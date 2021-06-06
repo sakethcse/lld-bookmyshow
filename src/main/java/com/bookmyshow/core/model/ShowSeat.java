@@ -12,11 +12,16 @@ import javax.persistence.Table;
 public class ShowSeat extends Auditable {
 
 
+
+  //ralationships
   @ManyToOne
   private Booking booking;
 
   @ManyToOne
   private MovieShow show;
+
+  @ManyToOne
+  private AudiSeat audiSeat;
 
   private ShowSeatStatus status = ShowSeatStatus.AVAILABLE;
 

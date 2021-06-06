@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,11 +24,14 @@ public class AudiSeat extends Auditable {
   private String seatNumber;
 
   //relationships
-  @OneToMany(mappedBy = "")
+  @OneToMany(mappedBy = "audiSeat")
   List<ShowSeat> showSeats = new ArrayList<ShowSeat>();
 
   @ManyToOne
   private Auditorium auditorium;
+
+  @ManyToMany
+  private List<SeatFeature> features = new ArrayList<SeatFeature>();
 
 
   public AudiSeat(String rowNumber, String seatNumber) {
