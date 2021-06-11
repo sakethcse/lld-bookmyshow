@@ -44,6 +44,7 @@ public class User extends Auditable {
     email = user.getEmail();
     saltedHashedPassword = user.getSaltedHashedPassword();
     roles = user.getRoles();
+    profile = user.getProfile();
   }
 
   public void setSaltedHashedPassword(String value) {

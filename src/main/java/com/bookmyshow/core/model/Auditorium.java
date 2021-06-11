@@ -54,13 +54,12 @@ public class Auditorium extends com.bookmyshow.core.model.Auditable {
     private List<AudiSeat> seats;
     private List<MovieShow> shows;
 
-    private Builder(Cinema cinema, String hallName) {
-      this.cinema = cinema;
+    private Builder(String hallName) {
       this.hallName = hallName;
     }
 
-    public static Builder aCinemaHall(Cinema cinema, String hallName) {
-      return new Builder(cinema, hallName);
+    public static Builder aCinemaHall(String hallName) {
+      return new Builder(hallName);
     }
 
     public Builder withHasAirConditioner(boolean hasAirConditioner) {

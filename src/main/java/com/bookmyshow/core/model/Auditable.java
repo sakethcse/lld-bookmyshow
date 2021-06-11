@@ -1,17 +1,26 @@
 package com.bookmyshow.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 
 @MappedSuperclass
-public abstract class Auditable {
+@EntityListeners(AuditingEntityListener.class)
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.StringIdGenerator.class,
+    property = "id"
+)
+public abstract class Auditable implements Serializable {
 
   @Id
   @GeneratedValue(generator = "sequence", strategy = GenerationType.SEQUENCE)
@@ -25,14 +34,14 @@ public abstract class Auditable {
   @Temporal(TemporalType.TIMESTAMP)
   @Getter
   @Setter
-  private Date createdAt;
+  private Date createdAt = new Date();
 
   @Column(nullable = false)
   @LastModifiedDate
   @Temporal(TemporalType.TIMESTAMP)
   @Getter
   @Setter
-  private Date updatedAt;
+  private Date updatedAt = new Date();
 
   @Override
   public boolean equals(Object o) {

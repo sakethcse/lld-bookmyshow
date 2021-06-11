@@ -7,8 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,6 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "movies")
+@EnableJpaAuditing
 public class Movie extends Auditable {
 
   //attribs
@@ -30,10 +34,10 @@ public class Movie extends Auditable {
 
 
   //relationships
-  @OneToMany(mappedBy = "movie")
+  @OneToMany(cascade = CascadeType.ALL,mappedBy = "movie")
   private List<MovieShow> shows = new ArrayList<MovieShow>();
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   private List<Genre> genres = new ArrayList<Genre>();
 
   public Movie(String name, MPAARating mpaaRating) {
@@ -83,8 +87,8 @@ public class Movie extends Auditable {
       Movie movie = new Movie(name, mpaaRating);
       movie.setDirector(director);
       movie.setSummary(summary);
-      movie.setShows(shows);
-      movie.setGenres(genres);
+      //movie.setShows(shows);
+      //movie.setGenres(genres);
       return movie;
     }
   }
